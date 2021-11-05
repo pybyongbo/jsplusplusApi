@@ -1,0 +1,78 @@
+### 项目介绍:
+
+此项目是用koa2简单搭建的一个服务端Api项目.主要用于学习B站`小野森森`老师的前端教程.
+
+项目提供给两个接口供前端测试使用:
+
+- 课程分类接口(/getcoursefield)
+- 课程分类列表接口(/getcoursefieldlist)
+
+
+### 全局安装Koa
+
+执行命令:
+
+```js
+ npm install koa-generator -g
+```
+
+```js
+  koa2 jsplusplusApi
+```
+
+```js
+  npm install
+  npm run start
+```
+
+### 接口预览与测试:
+
+打开浏览器,输入`http://localhost:3001/getcoursefield`即可看到接口返回的数据
+
+### 项目中对应数据表的sql语句:
+
+```mysql
+
+CREATE TABLE `course_field` (
+  `id` mediumint(6) unsigned NOT NULL AUTO_INCREMENT,
+  `fieldName` varchar(20) DEFAULT NULL,
+  `fieldType` smallint(5) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+INSERT INTO `course_field` VALUES (1, '前端高薪就业', 1);
+INSERT INTO `course_field` VALUES (2, '精品公益课', 2);
+INSERT INTO `course_field` VALUES (3, '精品小课', 3);
+INSERT INTO `course_field` VALUES (4, '全休班体验课', 4);
+
+```
+
+```mysql
+
+CREATE TABLE `course_field_list` (
+  `id` mediumint(6) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(200) DEFAULT NULL,
+  `fieldType` smallint(5) DEFAULT '0',
+  `thumb` varchar(200) DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  `studying` smallint(5) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+INSERT INTO `course_field_list` VALUES (1, 'WEB前端开发高级工程师『快速就业助力计划』【JS++前端】', 1, 'http://tximg.jsplusplus.com/zwmTBpSrxjoAgRDhOrL2E.jpg', 3388.00, 0);
+INSERT INTO `course_field_list` VALUES (2, 'WEB前端高级工程师养成计划『全修精英特训』【JS++】', 1, 'http://tximg.jsplusplus.com/Qcy-cP_NfnuQSWZ3fEAOh.jpg', 9988.00, 86);
+INSERT INTO `course_field_list` VALUES (3, ' WEB前端高级工程师养成计划『提升计划-第3期』【JS++】', 1, 'http://tximg.jsplusplus.com/lrYzQvKZLcXMmiBZ6Cheh.jpg', 7580.00, 13);
+INSERT INTO `course_field_list` VALUES (4, 'WEB前端高级工程师养成计划『就业计划-第4期』【JS++】', 1, 'http://tximg.jsplusplus.com/zwmTBpSrxjoAgRDhOrL2E.jpg', 6180.00, 60);
+INSERT INTO `course_field_list` VALUES (5, '不止于就业前端技术|JavaScript底层核心|组件化开发|JS|Vue|Node', 2, 'http://tximg.jsplusplus.com/hKA-X-jcjSugmjPOYfUdw.jpg', 0.00, 941);
+INSERT INTO `course_field_list` VALUES (6, '【2020全新JS++前端】『JavaScript业务能力提升班』', 2, 'http://tximg.jsplusplus.com/QB2ZwTAfmxkOF2gmeK19p.jpg', 0.00, 82);
+INSERT INTO `course_field_list` VALUES (7, 'WEB大前端开发架构师养成计划『全栈架构特训』【JS++】', 2, 'http://tximg.jsplusplus.com/zwmTBpSrxjoAgRDhOrL2E.jpg', 10688.00, 3);
+INSERT INTO `course_field_list` VALUES (8, 'JS++小野老师带你玩转『前端JavaScript模块化』', 3, 'http://tximg.jsplusplus.com/TSAE9FUv7Up7a4bFwSNBY.jpg', 119.00, 71);
+INSERT INTO `course_field_list` VALUES (9, 'Vue『前端课堂』WEB APP - Vue-router|Vuex【10元拿好课】', 3, 'http://tximg.jsplusplus.com/w4zEz7jlJ3HQEP7xlZTYv.jpg', 299.00, 41);
+INSERT INTO `course_field_list` VALUES (10, '10小时搞定移动端『新闻头条』【纯正阿里系组件化开发】', 3, 'http://tximg.jsplusplus.com/XOW3qUQsbN7TzoeVDuMHR.jpg', 169.00, 8713);
+INSERT INTO `course_field_list` VALUES (11, 'VueJS项目架构与组件化设计|组件抽象|全实战项目|【一线生活通】', 3, 'http://tximg.jsplusplus.com/ALrQaIA3wquB-YKg8KOQN.jpg', 498.00, 6);
+INSERT INTO `course_field_list` VALUES (12, '小野老师-JS组件化『小米手机官网升级版』', 3, 'http://tximg.jsplusplus.com/ALrQaIA3wquB-YKg8KOQN.jpg', 498.00, 6);
+INSERT INTO `course_field_list` VALUES (13, 'WEB前端开发系列项目实战『直播教室』【JS++前端】', 4, 'http://tximg.jsplusplus.com/BocDkboW0LsQDXSOGNVQQ.jpg', 0.00, 35);
+INSERT INTO `course_field_list` VALUES (14, '高级前端Vip就业班试学课【JS++】', 4, 'http://tximg.jsplusplus.com/ekTdOeqvQjQHw5-XYWkeo.jpg', 299.00, 54);
+
+```
