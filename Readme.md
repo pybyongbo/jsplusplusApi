@@ -25,6 +25,73 @@
   npm run start
 ```
 
+### JS(map)循环中,使用异步:
+
+![](https://images.901web.com/2021-11-10-071008.png)
+
+如上图所示,我想在接口中统计每个分类下面课程总数,然后返回一个`totalCount`字段合并上去.
+
+首先,我需要循环`/course/get_course_fields`这个接口返回的数据,然后拿到每项的`fieldType`字段,然后循环异步调用`/course/get_field_course_list`这个接口,统计每个课程分类对应的条数.
+
+
+**controller文件夹中对应的方法如下:**
+
+#### 循环调用异步,增加*totalCount*字段
+
+```javascript
+
+const fdata = async (data) => {
+
+  const promises = data.map(async item => {
+    const listItem = await courseModel.get_field_course_list(item.fieldType).then(res => res.length);
+    return listItem;
+
+  });
+
+  const listItems = await Promise.all(promises);
+  // console.log('promises', promises)
+  console.log('result listItems', listItems);
+  const res = data.map((item, index) => ({
+    ...item,
+    totalCount: listItems[index]
+  }));
+
+  return res;
+
+}
+
+```
+
+#### 获取课程分类导航数据
+
+```javascript
+// 查询分类:
+exports.getFieldCourse = async ctx => {
+
+  await courseModel
+    .get_field_course()
+    .then(async result => {
+      ctx.body = {
+        code: 0,
+        message: "成功",
+        result: await fdata(result)
+        // result:result
+      };
+    })
+    .catch(() => {
+      ctx.body = {
+        code: 1,
+        message: "失败"
+      };
+    });
+}
+
+
+```
+
+
+
+
 ### 接口预览与测试:
 
 ##### 课程分类导航

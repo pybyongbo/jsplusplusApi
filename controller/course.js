@@ -38,7 +38,7 @@ exports.getFieldCourse = async ctx => {
     .catch(() => {
       ctx.body = {
         code: 1,
-        message: "失败00"
+        message: "失败"
       };
     });
 }
