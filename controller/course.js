@@ -10,8 +10,8 @@ const fdata = async (data) => {
   });
 
   const listItems = await Promise.all(promises);
-  // console.log('promises', promises)
-  console.log('result listItems', listItems);
+  // console.log('promises', promises);
+  // console.log('result listItems', listItems);
   const res = data.map((item, index) => ({
     ...item,
     totalCount: listItems[index]
