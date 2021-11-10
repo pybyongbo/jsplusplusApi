@@ -4,8 +4,8 @@
 
 项目提供给两个接口供前端测试使用:
 
-- 课程分类接口(/getcoursefield)
-- 课程分类列表接口(/getcoursefieldlist)
+- 课程分类接口(/course/get_course_fields)
+- 课程分类列表接口(/course/get_courses/all)
 
 
 ### 全局安装Koa
@@ -27,7 +27,22 @@
 
 ### 接口预览与测试:
 
-打开浏览器,输入`http://localhost:3001/getcoursefield`即可看到接口返回的数据
+##### 课程分类导航
+```txt
+API地址:`http://localhost:3001/course/get_course_fields`;
+打开浏览器,输入`http://localhost:3001/course/get_course_fields`即可看到接口返回的课程所有分类数据;
+```
+##### 课程分类数据列表:
+```txt
+API地址:`http://localhost:3001/course/get_courses/all`;
+打开浏览器,输入`http://localhost:3001/course/get_courses/all`即可看到接口返回课程分类列表的数据;
+```
+##### 课程对应分类列表数据:
+```txt
+API地址:`http://localhost:3001/course/get_courses/all?field=${field}`
+打开浏览器,输入`http://localhost:3001/course/get_courses/all?field=1`即可看到接口返回课程分类列表的数据;
+```
+
 
 ### 项目中对应数据表的sql语句:
 

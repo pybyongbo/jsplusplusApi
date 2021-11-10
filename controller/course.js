@@ -1,21 +1,44 @@
 const courseModel = require("../lib/mysql.js");
 
 
+const fdata = async (data) => {
+
+  const promises = data.map(async item => {
+    const listItem = await courseModel.get_field_course_list(item.fieldType).then(res => res.length);
+    return listItem;
+
+  });
+
+  const listItems = await Promise.all(promises);
+  // console.log('promises', promises)
+  console.log('result listItems', listItems);
+  const res = data.map((item, index) => ({
+    ...item,
+    totalCount: listItems[index]
+  }));
+
+  return res;
+
+}
+
+
 // 查询分类:
 exports.getFieldCourse = async ctx => {
+
   await courseModel
     .get_field_course()
-    .then(result => {
+    .then(async result => {
       ctx.body = {
         code: 0,
         message: "成功",
-        fieldCourse: result
+        result: await fdata(result)
+        // result:result
       };
     })
     .catch(() => {
       ctx.body = {
         code: 1,
-        message: "失败"
+        message: "失败00"
       };
     });
 }
@@ -24,7 +47,7 @@ exports.getFieldCourse = async ctx => {
 // 查询分类对应的列表数据:
 
 exports.getFieldCourseList = async ctx => {
-  let {field=-1} = ctx.query;
+  let { field = -1 } = ctx.query;
   // sleep.sleep(1);
   await courseModel
     .get_field_course_list(field)
@@ -32,7 +55,7 @@ exports.getFieldCourseList = async ctx => {
       ctx.body = {
         code: 0,
         message: "成功",
-        courseList: result
+        result: result
       };
     })
     .catch(() => {
