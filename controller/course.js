@@ -4,7 +4,7 @@ const courseModel = require("../lib/mysql.js");
 const fdata = async (data) => {
 
   const promises = data.map(async item => {
-    const listItem = await courseModel.get_field_course_list(item.fieldType).then(res => res.length);
+    const listItem = await courseModel.get_field_course_list(item.fieldType,'').then(res => res.length);
     return listItem;
 
   });
@@ -47,10 +47,10 @@ exports.getFieldCourse = async ctx => {
 // 查询分类对应的列表数据:
 
 exports.getFieldCourseList = async ctx => {
-  let { field = -1 } = ctx.query;
-  // sleep.sleep(1);
+  let { field = -1,keywords="" } = ctx.query;
+  console.log('keywords',keywords);
   await courseModel
-    .get_field_course_list(field)
+    .get_field_course_list(field,keywords)
     .then(result => {
       ctx.body = {
         code: 0,
@@ -65,3 +65,26 @@ exports.getFieldCourseList = async ctx => {
       };
     });
 }
+
+
+// 新增课程信息
+
+
+exports.courseCreate = async ctx => {
+  let { title, fieldType, thumb,price,studying } = ctx.request.body;
+//   console.log('ctx.request.body',ctx.request.body)
+  // await userModel.insertPost([name, newTitle,  newContent, id, time, avator])
+  // let _sql = "insert into posts set name=?,title=?,content=?,uid=?,moment=?,avator=?;"
+  await courseModel.add_course_info([title, fieldType, thumb,price,studying]).then(() => {
+      ctx.body = {
+        code: 200,
+        message: "课程信息新增成功"
+      };
+    })
+    .catch(() => {
+      ctx.body = {
+        code: 500,
+        message: "新增失败"
+      };
+    });
+  }

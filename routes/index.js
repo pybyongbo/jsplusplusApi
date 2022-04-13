@@ -18,9 +18,12 @@ router.get('/json', async (ctx, next) => {
 })
 
 //课程所有分类列表
-router.get('/course/get_course_fields', controller.getFieldCourse)
+router.get('/course/get_course_fields', controller.getFieldCourse);
 
 //课程分类列表数据
-router.get('/course/get_courses/all', controller.getFieldCourseList)
+router.get('/course/get_courses/all', controller.getFieldCourseList);
+
+// 新增课程信息
+router.post('/course/course_create', controller.courseCreate);
 
 module.exports = router

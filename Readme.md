@@ -158,3 +158,11 @@ INSERT INTO `course_field_list` VALUES (13, 'WEB前端开发系列项目实战�
 INSERT INTO `course_field_list` VALUES (14, '高级前端Vip就业班试学课【JS++】', 4, 'http://tximg.jsplusplus.com/ekTdOeqvQjQHw5-XYWkeo.jpg', 299.00, 54);
 
 ```
+
+
+### 更新日志 (2022-04-13)
+
+1.改写列表接口,支持搜索查询功能.
+2.添加新增课程功能(以及课程分类)
+3.课程列表样式切换
+
