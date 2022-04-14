@@ -22,7 +22,7 @@ const fdata = async (data) => {
 }
 
 
-// 查询分类:
+// 查询课程分类:
 exports.getFieldCourse = async ctx => {
 
   await courseModel
@@ -66,18 +66,30 @@ exports.getFieldCourseList = async ctx => {
     });
 }
 
+//新增课程分类信息  courseCateCreate
+exports.courseCateCreate = async ctx => {
+    let { fieldName, fieldType } = ctx.request.body;
+    await courseModel.add_course_cate([fieldName, fieldType]).then(() => {
+        ctx.body = {
+          code: 0,
+          message: "课程分类新增成功"
+        };
+      })
+      .catch(() => {
+        ctx.body = {
+          code: 500,
+          message: "新增失败"
+        };
+      });
+    }
+
 
 // 新增课程信息
-
-
 exports.courseCreate = async ctx => {
   let { title, fieldType, thumb,price,studying } = ctx.request.body;
-//   console.log('ctx.request.body',ctx.request.body)
-  // await userModel.insertPost([name, newTitle,  newContent, id, time, avator])
-  // let _sql = "insert into posts set name=?,title=?,content=?,uid=?,moment=?,avator=?;"
   await courseModel.add_course_info([title, fieldType, thumb,price,studying]).then(() => {
       ctx.body = {
-        code: 200,
+        code: 0,
         message: "课程信息新增成功"
       };
     })

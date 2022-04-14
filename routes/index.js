@@ -24,6 +24,9 @@ router.get('/course/get_course_fields', controller.getFieldCourse);
 router.get('/course/get_courses/all', controller.getFieldCourseList);
 
 // 新增课程信息
+router.post('/course/course_cate_create', controller.courseCateCreate);
+
+// 新增课程信息
 router.post('/course/course_create', controller.courseCreate);
 
 module.exports = router
