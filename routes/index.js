@@ -29,8 +29,14 @@ router.post('/course/course_cate_create', controller.courseCateCreate);
 // 修改课程分类信息
 router.post('/course/course_cate_update', controller.courseCateUpdate);
 
+// 删除课程分类判断该分类下面是否有课程列表数据
+router.post('/course/course_list_by_cate', controller.findCourseListByCourseFieldType);
+
 // 删除课程分类信息
 router.post('/course/course_cate_delete', controller.courseCateDelete);
+
+// 删除课程分类对应的课程列表数据 
+// router.post('/course/course_list_delete', controller.courseListDelete);
 
 // 新增课程信息
 router.post('/course/course_create', controller.courseCreate);
