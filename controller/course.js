@@ -1,5 +1,20 @@
 const courseModel = require("../lib/mysql.js");
 
+/**
+ * 返回值
+ * @param code 返回码
+ * @param msg	返回信息
+ * @param data 返回数据
+ * @return
+ */
+
+var resObj = (code, msg, data) => {
+  return {
+    status: code,
+    msg: msg,
+    data: data
+  }
+}
 
 const fdata = async (data) => {
 
@@ -193,4 +208,18 @@ exports.courseCreate = async ctx => {
         message: "新增失败"
       };
     });
+}
+
+exports.courseThumbUpload = async (ctx, next) => {
+  // console.log('ctx.request', ctx.request, ctx)
+  try {
+    let fileName = ctx.req.file.filename
+    let resData = {}
+    resData.fileName = fileName
+    resData.filePath = 'uploads/' + fileName
+    resData.hostName = ctx.request.host;
+    ctx.body = resObj(0, '上传成功', resData)
+  } catch (e) {
+    ctx.body = resObj(500, '上传出错', e.toString())
+  }
 }

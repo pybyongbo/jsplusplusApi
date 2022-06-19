@@ -160,11 +160,29 @@ SELECT count(*),a.fieldName,b.fieldType FROM course_field AS a INNER JOIN course
 
 ```
 
+**删除课程分类,删除对应分类下面的课程列表数据**
+
+```mysql
+
+SELECT count(*) as count,GROUP_CONCAT(id) as Ids from course_field_list where fieldType = ${fieldType};
+
+`DELETE from course_field_list where id in (${ids})`;
+
+```
+
 ### 更新日志 (2022-04-13)
 
-1.改写列表接口,支持搜索查询功能. 2.添加新增课程功能(以及课程分类) 3.课程列表样式切换
+1. 改写列表接口,支持搜索查询功能.
+2. 添加新增课程功能(以及课程分类)
+3. 课程列表样式切换 (列表和卡片样式)
 
 ### 待优化更新任务列表
 
 1. 更改课程分类 CODE 字段 (不能重复,已经存在对应的课程 code 前端给出提示信息)
 2. 删除课程分类数据时候,如果课程分类下面有对应的课程信息,不能直接删除.(或者是删除对应的课程列表数据)
+
+---
+
+- [x] 已完成的计划
+- [ ] 加入多图片上传功能
+- [ ] 引入富文本编辑器
