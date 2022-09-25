@@ -195,8 +195,8 @@ exports.courseCateDelete = async ctx => {
 
 // 新增课程信息
 exports.courseCreate = async ctx => {
-  let { title, fieldType, thumb, price, studying } = ctx.request.body;
-  await courseModel.add_course_info([title, fieldType, thumb, price, studying]).then(() => {
+  let { title, description, author, fieldType, thumb, price, studying, content, createtime } = ctx.request.body;
+  await courseModel.add_course_info([title, description, author, fieldType, thumb, price, studying, content, createtime]).then(() => {
     ctx.body = {
       code: 0,
       message: "课程信息新增成功"
