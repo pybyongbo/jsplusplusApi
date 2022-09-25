@@ -23,4 +23,7 @@ router.get('/course/get_course_fields', controller.getFieldCourse)
 //课程分类列表数据
 router.get('/course/get_courses/all', controller.getFieldCourseList)
 
+//课程分类列表数据
+router.get('/course/get_courses_list', controller.getFieldCourseListByKeyWords)
+
 module.exports = router

@@ -158,3 +158,19 @@ INSERT INTO `course_field_list` VALUES (13, 'WEB前端开发系列项目实战�
 INSERT INTO `course_field_list` VALUES (14, '高级前端Vip就业班试学课【JS++】', 4, 'http://tximg.jsplusplus.com/ekTdOeqvQjQHw5-XYWkeo.jpg', 299.00, 54);
 
 ```
+
+
+
+```mysql
+-- 列出了每个课程分类下面的课程总数
+SELECT
+  course_field.id,
+  course_field.fieldName,
+	course_field.fieldType,
+	COUNT( course_field.fieldType ) AS totalCount 
+FROM
+	course_field
+	LEFT JOIN course_field_list ON course_field.fieldType = course_field_list.fieldType 
+GROUP BY
+	course_field.fieldType;
+```

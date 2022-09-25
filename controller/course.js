@@ -25,22 +25,37 @@ const fdata = async (data) => {
 // 查询分类:
 exports.getFieldCourse = async ctx => {
 
-  await courseModel
-    .get_field_course()
-    .then(async result => {
-      ctx.body = {
-        code: 0,
-        message: "成功",
-        result: await fdata(result)
-        // result:result
-      };
-    })
-    .catch(() => {
-      ctx.body = {
-        code: 1,
-        message: "失败"
-      };
-    });
+  // 方法一:
+  // await courseModel
+  //   .get_field_course()
+  //   .then(async result => {
+  //     ctx.body = {
+  //       code: 0,
+  //       message: "成功",
+  //       result: await fdata(result)
+  //       // result:result
+  //     };
+  //   })
+  //   .catch(() => {
+  //     ctx.body = {
+  //       code: 1,
+  //       message: "失败"
+  //     };
+  //   });
+
+  // 方法二:
+  await courseModel.get_field_course_groupby_category().then((result) => {
+    ctx.body = {
+      code: 0,
+      message: "成功",
+      result: result
+    };
+  }).catch(() => {
+    ctx.body = {
+      code: 1,
+      message: "失败"
+    };
+  });
 }
 
 
@@ -51,6 +66,28 @@ exports.getFieldCourseList = async ctx => {
   // sleep.sleep(1);
   await courseModel
     .get_field_course_list(field)
+    .then(result => {
+      ctx.body = {
+        code: 0,
+        message: "成功",
+        result: result
+      };
+    })
+    .catch(() => {
+      ctx.body = {
+        code: 1,
+        message: "失败"
+      };
+    });
+}
+
+// 根据关键词进行搜索
+
+exports.getFieldCourseListByKeyWords = async ctx => {
+  let { keywords = '' } = ctx.query;
+  // sleep.sleep(1);
+  await courseModel
+    .get_field_course_list_by_keywords(keywords)
     .then(result => {
       ctx.body = {
         code: 0,
