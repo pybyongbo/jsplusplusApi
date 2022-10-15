@@ -72,4 +72,7 @@ router.post('/course/course_thumb_upload', upload.single('thumb'), controller.co
 // 新增课程信息
 router.post('/course/course_create', controller.courseCreate);
 
+// 单篇文章页
+router.get("/course/:courseId", controller.getCourseDetail);
+
 module.exports = router

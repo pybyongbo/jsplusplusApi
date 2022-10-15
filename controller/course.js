@@ -223,3 +223,18 @@ exports.courseThumbUpload = async (ctx, next) => {
     ctx.body = resObj(500, '上传出错', e.toString())
   }
 }
+
+exports.getCourseDetail = async (ctx, next) => {
+  try {
+    let courseId = ctx.params.courseId;
+    await courseModel.get_course_detail_info(courseId).then((res) => {
+      ctx.body = {
+        code: 0,
+        result: res[0],
+        message: "课程详情查询成功"
+      };
+    })
+  } catch (e) {
+    ctx.body = resObj(500, '上传出错', e.toString())
+  }
+}
